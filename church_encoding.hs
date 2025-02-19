@@ -18,3 +18,14 @@ INC ZERO = UM
 INC = \n f x -> f (n f x)
 -- ou
 INC = \n.\f.\x.f (n f x)
+
+-- Incremento eh a mesma coisa que somar `n + 1`
+-- que pode ser generalizado para `m + n`
+
+-- `m` eh um numero de Church que requer dois argumentos, neste caso o `f` e `(n f x)`
+-- esses dois      \/ \    /
+SOMA \n m f x -> n f (m f x)
+-- ou
+SOMA \n.\m.\f.\x.n f (m f x)
+
+-- Detalhe: poderia ser `\N M f x -> M f (N f x)` pois a ordem da adicao nao muda o resultado
