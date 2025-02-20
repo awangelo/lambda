@@ -52,3 +52,21 @@ SOMA_DEZESSEIS = \n -> SOMA_QUATRO (SOMA_QUATRO (SOMA_QUATRO (SOMA_QUATRO n)))
 5 . (\c -> c (\a -> \b -> b)) ((\a -> \b -> \f -> f a b) p q)
 
 -- (\c -> c (\a -> \b -> b)) (\f -> f p q)
+-- (\f -> f p q) (\a -> \b -> b))
+-- (\a -> \b -> b) p q
+-- q
+
+let x = 5 in let y = (add x 3) in (mul x y)
+
+-- mul 5 (add 5 3))
+-- mul 5 8
+-- 40
+
+let a = 7 in let g = λx . (mul a x) in let a = 2 in (g 10)
+
+-- (\a -> (\g -> (\a -> g 10) 2) (\x -> mul a x)) 7
+-- (\g -> (\a -> g 10) 2) (\x -> mul 7 x)
+-- (\a -> (\x -> mul 7 x) 10) 2
+-- (\x -> mul 7 x) 10
+-- mul 7 10
+-- 70
