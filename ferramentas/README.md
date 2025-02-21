@@ -17,7 +17,11 @@
 ## CLI
 
 `stack run`: Roda o target principal do projeto.
+
 `stack build`: Builda o o target principal do projeto.
+
 `stack ghci`: Abre o repl interativo no projeto.
+
 `runghc -Wall *.hs`: Roda um arquivo sozinho.
+
 `ghc -Wall *.hs`: Builda um arquivo sozinho.
