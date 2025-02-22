@@ -44,3 +44,14 @@ odeioZeros2 :: (Eq p, Num p) => p -> p -> p
 odeioZeros2 0 _ = 0
 odeioZeros2 _ 0 = 0
 odeioZeros2 x y = x * y
+
+-- Simplifique:
+-- (&&&) :: Bool -> Bool -> Bool
+-- True &&& True = True
+-- True &&& False = False
+-- False &&& True = False
+-- False &&& False = False
+
+(&&&) :: Bool -> Bool -> Bool
+True &&& True = True
+_ &&& _ = False
