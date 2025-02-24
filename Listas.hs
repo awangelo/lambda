@@ -1,4 +1,5 @@
 module Listas where
+import qualified GHC.TypeLits as exceptions
 
 -- https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-List.html
 -- https://wiki.haskell.org/How_to_work_on_lists
@@ -30,8 +31,48 @@ listaInfinita = [1 ..]
 -- > A thunk is a value that is yet to be evaluated.
 -- > A lazy run-time system does not evaluate a thunk unless it has to.
 
--- Exemplos com operacoes simples:
+-- Tamanho da lista - O(N) 
+length listaNormal
+-- 5
 
 -- Acessar index `n` - O(n)
--- listaNormal !! 4
+-- Pode gerar exceptions.
+listaNormal !! 4
 -- 5
+listaNormal !! 9
+-- *** Exception: Prelude.!!: index too large
+
+-- (!?) faz parte de Data.List.Safe (nao ta no Prelude)
+listaNormal !? 4
+-- Just 5
+listaNormal !? 9
+-- Nothing
+
+
+-- (++) Concatenacao de duas listas - O(2n)?
+listaNormal ++ listaNormal
+-- [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+-- Acesso a elementos: 
+
+-- Primeiro no - O(1)
+head listaNormal
+-- 1
+
+-- Ultimo no O(N)
+last listaNormal
+
+-- Todos menos primeiro - O(1)
+-- `tail` retorna apenas o segundo no da lista O(1)
+-- (caso ela seja percorrida sera O(N)).
+tail listaNormal
+-- [2, 3, 4, 5]
+
+-- Todos menos Ultimo - O(N)
+init listaNormal
+-- [1, 2, 3, 4]
+
+-- Reverte uma lista finita - O(N)
+reverse listaNormal
+-- [5, 4, 3, 2, 1]
+
