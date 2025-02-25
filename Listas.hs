@@ -115,4 +115,4 @@ head [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 -- Lista com um elemento seguido de vários outros:
 --   (x : xs)
 
--- Se o elemento nao for ser usado, `x` pode ser substituidos por ``
+-- Se o elemento nao for ser usado, `x` pode ser substituidos por `_`
