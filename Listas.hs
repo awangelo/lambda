@@ -102,3 +102,17 @@ head [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 -- Implemente o operador !! utilizando as funções anteriores.
 
 (!!) n xs = head (drop n xs)
+
+
+-- PATTERN MATCHING:
+
+-- Lista vazia:
+--   []
+
+-- Lista com um elemento:
+--   (x : []) ou [x]
+
+-- Lista com um elemento seguido de vários outros:
+--   (x : xs)
+
+-- Se o elemento nao for ser usado, `x` pode ser substituidos por ``
