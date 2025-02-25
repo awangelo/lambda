@@ -76,3 +76,29 @@ init listaNormal
 reverse listaNormal
 -- [5, 4, 3, 2, 1]
 
+
+-- Esta presente na lista - O(N)
+elem 3 listaNormal
+-- 3 `elem` listaNormal
+-- True
+
+-- Retorna `n` primeiros elementos da lista
+take 2 listaNormal
+-- [1, 2]
+
+-- Retorna a lista sem os primeiros `n` elem
+drop 3 listaNormal
+-- [4, 5]
+
+
+-- EXERCICIOS:
+-- O que a seguinte expressão retornará?
+--
+-- head (tail [0..10])
+
+head [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+1
+
+-- Implemente o operador !! utilizando as funções anteriores.
+
+(!!) n xs = head (drop n xs)
