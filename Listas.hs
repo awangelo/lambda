@@ -1,5 +1,4 @@
 module Listas where
-import qualified GHC.TypeLits as exceptions
 
 -- https://hackage.haskell.org/package/base-4.21.0.0/docs/Data-List.html
 -- https://wiki.haskell.org/How_to_work_on_lists
