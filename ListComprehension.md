@@ -60,6 +60,7 @@ todosPrimos = [x | x <- [1..], ehPrimo x]
 
 ### Utilizando a função `pairs` defina a função sorted que retorna verdadeiro se uma lista está ordenada.
 ### Utilize também a função `and` que retorna verdadeiro se todos os elementos da lista forem verdadeiros.
+
 ```haskell
 pairs :: [a] -> [(a,a)]
 pairs xs = zip xs (tail xs)
@@ -71,4 +72,35 @@ and _         = False
 
 sorted :: (Ord a) => [a] -> Bool
 sorted xs = and [x <= y | (x, y) <- pairs xs]
+```
+
+### Crie uma função recursiva chamada `insert` que insere um valor `x`
+### em uma lista `ys` ordenada de tal forma a mantê-la ordenada:
+
+```haskell
+insert :: (Ord a) => a -> [a] -> [a]
+insert x [] = [x]
+insert x (y:ys)
+  | x <= y    = x:y:ys
+  | otherwise = insert x ys
+```
+
+### Crie uma função recursiva chamada `isort` que utiliza a função `insert` para implementar o Insertion Sort:
+
+```haskell
+isort :: Ord a => [a] -> [a]
+isort [] = []
+isort (x:xs) = insert x (isort xs)
+```
+
+### Complete a função qsort que implementa o algoritmo Quicksort:
+qsort :: Ord a => [a] -> [a]
+qsort []     = []
+qsort (x:xs) = qsort menores ++ [x] ++ qsort maiores
+  where
+    menores = [a | ???]
+    maiores = [b | ???]
+
+```haskell
+
 ```
