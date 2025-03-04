@@ -41,6 +41,34 @@ meuLength [10,9..2]
 -- 9
 ```
 
+## Exercicios
+
 ### Defina uma funcao que retorna uma lista com os numeros primos
 ### Dica: primeiro criar uma funcao que retorna os divisores de um numero
 ### Dica: depois criar uma funcao que verifica se um numero eh primo
+
+```haskell
+divisores :: Int -> [Int]
+divisores n = [x | x <- [1..n], n `mod` x == 0]
+
+ehPrimo :: Int -> Bool
+ehPrimo n = divisores n == [1, n]
+
+todosPrimos :: [Int]
+todosPrimos = [x | x <- [1..], ehPrimo x]
+```
+
+### Utilizando a função `pairs` defina a função sorted que retorna verdadeiro se uma lista está ordenada.
+### Utilize também a função `and` que retorna verdadeiro se todos os elementos da lista forem verdadeiros.
+```haskell
+pairs :: [a] -> [(a,a)]
+pairs xs = zip xs (tail xs)
+
+and :: [Bool] -> Bool
+and []        = True
+and (True:xs) = and xs
+and _         = False
+
+sorted :: (Ord a) => [a] -> Bool
+sorted xs = and [x <= y | (x, y) <- pairs xs]
+```
