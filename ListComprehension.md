@@ -106,7 +106,8 @@ qsort (x:xs) = qsort menores ++ [x] ++ qsort maiores
 
 ### Vamos considerar a função drop que remove os n primeiros elementos de uma lista:
 > drop 3 [1..10]
--- [4,5,6,7,8,9,10]
+
+> [4,5,6,7,8,9,10]
 
 ```haskell
 drop' :: (Integral a) => a -> [b] -> [b]
