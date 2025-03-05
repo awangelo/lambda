@@ -94,13 +94,34 @@ isort (x:xs) = insert x (isort xs)
 ```
 
 ### Complete a função qsort que implementa o algoritmo Quicksort:
-qsort :: Ord a => [a] -> [a]
+
+```haskell
+qsort :: (Ord a) => [a] -> [a]
 qsort []     = []
 qsort (x:xs) = qsort menores ++ [x] ++ qsort maiores
   where
-    menores = [a | ???]
-    maiores = [b | ???]
+    menores = [a | a <- xs | a < x ]
+    maiores = [b | b <- xs | b >= x ]
+```
+
+### Vamos considerar a função drop que remove os n primeiros elementos de uma lista:
+> drop 3 [1..10]
+-- [4,5,6,7,8,9,10]
 
 ```haskell
-
+drop' :: (Integral a) => a -> [b] -> [b]
+drop' _ []     = []
+drop' 0 xs     = xs
+drop' n (_:xs) = drop (n-1) xs
 ```
+
+### Faça uma versão que utilize uma variável acumuladora.
+```haskell
+hanoi :: Int -> Char -> Char -> Char -> [(Int, Char, Char)]
+hanoi 1 estacaInicio estacaFim _ = [(1, estacaInicio, estacaFim)]
+hanoi n estacaInicio estacaFim estacaAux =
+  hanoi (n - 1) estacaInicio estacaAux estacaFim
+    ++ [(n, estacaInicio, estacaFim)]
+    ++ hanoi (n - 1) estacaAux estacaFim estacaInicio
+```
+Arquivo esta em: [Hanoi.hs](./Hanoi.hs)
