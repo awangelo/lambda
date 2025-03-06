@@ -98,3 +98,90 @@ dropWhile :: (a -> Bool) -> [a] -> [a]
 -- > dropWhile even [8,4,2,3,6,11]
 -- [3,6,11]
 ```
+
+### foldr, foldl
+
+Muitas funcoes de listas com implementacoes recursivas podem ser generalizadas usando um caso base e uma funcao de combinacao:
+
+```haskell
+sum []     = 0
+sum (x:xs) = x + sum xs
+
+product []     = 1
+product (x:xs) = x * product xs
+
+length []     = 0
+length (_:xs) = 1 + length xs
+
+-- Sao generalizadas por:
+foo [] = v
+foo (x:xs) = f x (foo xs)
+```
+
+O `foldr` implementa essa generalizacao:
+
+```haskell
+foldr :: (a -> b -> b) -> b -> [a] -> b
+foldr f v [] = v
+foldr f v (x:xs) = f x (foldr f v xs)
+
+-- Sendo `(x:xs)` = x1 : x2 : x3 ... xn : []
+-- O `:` eh substituido pela funcao `f`:
+x1 `f` (x2 `f` (x3 `f` []))
+
+
+-- `0` eh o "caso base" de `+`
+foldr (+) 0 [1..5]
+-- 1 : (2 : (3 : (4 : (5 : []))))
+-- 1 + (2 + (3 + (4 + (5 + []))))
+-- 15
+
+-- `1` eh o "caso base" de `*`
+foldr (*) 1 [4,3..1]
+-- 4 : (3 : (2 : (1 : [])))
+-- 4 * (3 * (2 * (1 * [])))
+-- 24
+```
+
+## Exercicios:
+
+### Defina `produto` utilizando foldr.
+
+```haskell
+produto xs = foldr (*) 1 xs
+-- Como `xs` aparece apenas uma vez o final pode ser substituido por: 
+produto = foldr (*) 1
+```
+
+### Como podemos implementar `tamanho` utilizando foldr?
+```haskell
+tamanho :: [a] -> Int
+tamanho []     = 0
+tamanho (_:xs) = 1 + tamanho xs
+
+tamanho = foldr (+1) 0
+```
+
+Nao funciona, pois `foldr` quer, como primeiro argumento, uma funcao que recebe dois tipos diferentes e retorna o tipo do segundo (o mesmo que o prorio `foldr` vai retornar)
+
+```foldr :: Foldable t => (a -> b -> b) -> b -> t a -> b```
+
+```(+1) :: Num a => a -> a```
+
+
+### Reescreva a função reverse utilizando foldr:
+```haskell
+reverse :: [a] -> [a]
+reverse []     = []
+reverse (x:xs) = reverse xs ++ [x]
+```
+
+```haskell
+-- snoc (x:xs) = xs ++ [x]
+-- `snoc` recebe um array e devolve outro, ou seja, tem o tipo [a] -> [a], mas foldr quer uma func que recebe dois arrays: [a] -> [a] -> [a]
+
+snoc x xs = xs ++ [x]
+reverso = foldr snoc []
+-- 1 : (2 : (3 : []))
+-- (([] ++ [3]) ++ [2]) ++ [1]
+```
