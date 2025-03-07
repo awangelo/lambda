@@ -185,3 +185,21 @@ reverso = foldr snoc []
 -- 1 : (2 : (3 : []))
 -- (([] ++ [3]) ++ [2]) ++ [1]
 ```
+
+## Reducible expressions
+
+No contexto de uma soma de uma lista muito grande como:
+
+```haskell
+foldr f z []     = z
+foldr f z (x:xs) = x `f` foldr f z xs
+
+sum1 = foldr (+) 0
+sum1 [1..1000000]
+```
+
+Acontece: `1 + (2 + (3 + (4 + (foldr (+) 0 [5..1000000]))))`
+
+Por causa da ordem dos `()` e da lazy valuation, a funcao `foldr` eh chamada recursivamente ate o final da lista, e so entao comeca a somar os valores. Ou seja, nenhuma soma eh reduzida ate que a expressao seja criada.
+
+`1 + (2 + (3 + (4 + (...))))` nao pode ser reduzida para: `3 + (3 + (4 + (...)))`
